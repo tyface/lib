@@ -1,3 +1,42 @@
+
+
+/* 타이머  TODO 공통으로 사용하려면 많이 손봐야할 것 같다..
+ * el : 남은시간 타이머 요소 : 아이디나 클래스명 ex)'#timer'
+ * cb : 콜백 함수
+ */
+var missionTime = 180;			// 인증번호 유효 시간설정(3분)
+var tempInterval;			// 임시 인터벌 변수
+
+function missionTimer(el, cb) {
+    var minutes;			// 분
+    var seconds;			// 초
+	
+    clearInterval(tempInterval);
+
+    /* 인터벌 영역 */
+    tempInterval = setInterval(function() {
+        minutes = parseInt(missionTime / 60 % 60, 10);
+        seconds = parseInt(missionTime % 60, 10);
+
+        /* 숫자 2자리 맞추기 */
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        /* 계산된 시간 요소에 셋팅 */
+        $(el).html(minutes + ":" + seconds);
+
+        /* 0초가 되면 인터벌 종료 */
+        if (--missionTime < 0) {
+        	missionTime = 0;
+            clearInterval(tempInterval);
+
+            if (typeof cb === "function") {
+            	cb();
+            }
+        }
+    }, 1000);
+}
+
 /*
 레이어 팝업 열기
 (자바의 컨트롤러를 통하여 팝업 열기)
