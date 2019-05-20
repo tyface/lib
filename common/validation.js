@@ -17,3 +17,8 @@ $(function(){
     $(this).val($(this).val().replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\'\"\\]/g,""));
   }
 })
+
+//${str.replaceAll('^(01[0|1|6|7|8|9]?)-?([*]{3,4})-?([0-9]{4})$','$1-$2-$3')} // 전화번호 '-' 추가
+//<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+//<fmt:formatNumber value="${str}" pattern="0.00"/> 소수점 2자리 표기
+//<fmt:formatNumber value="${str}" pattern="#,###"/> 3자리마다 콤마 표기
